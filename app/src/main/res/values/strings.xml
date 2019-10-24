@@ -1,0 +1,55 @@
+<resources>
+    <string name="app_name">SensorInfo</string>
+    <string name="home">Home</string>
+    <string name="itemText">sampleText</string>
+
+    <string name="nav_button_open">"Open the sensor list</string>
+    <string name="nav_button_close">"Close the sensor list</string>
+
+    <string name="sensor_name">SensorName: </string>
+    <string name= "sensor_vendor">Vendor: </string>
+    <string name= "sensor_version">Version: </string>
+    <string name= "sensor_maxrange">Max Range: </string>
+    <string name= "sensor_resolution">Resolution: </string>
+    <string name= "sensor_power">Current: </string>
+
+    <string name= "ACCELEROMETER_NAME">Accelerometer</string>
+    <string name= "ACCELEROMETER_DESC">Accelerometer mesures acceleration along the three axis.</string>
+
+    <string name= "GYROSCOPE_NAME">Gyroscope</string>
+    <string name= "GYROSCOPE_DESC">Gyroscope is a device used for measuring or maintaining orientation and angular velocity. The values are the three axis of angular speed.</string>
+
+
+    <string name= "PROXIMITY_NAME">Proximity</string>
+    <string name= "PROXIMITY_DESC">Proximity sensor mesures the distance of an object from the front of the phone.</string>
+    <string name= "PROXIMITY_NEAR">Near</string>
+    <string name= "PROXIMITY_FAR">Far</string>
+
+
+    <string name= "MAGNETOMETER_NAME">Magnetic field</string>
+    <string name= "MAGNETOMETER_DESC">Magnetometer mesures the magnetic field along the three axis.</string>
+
+
+    <string name= "LIGHT_NAME">Light </string>
+    <string name= "LIGHT_DESC">Light sensor measures the light level front of the phone.</string>
+
+
+    <string name= "ORIENTATION_NAME">Orientation sensor</string>
+    <string name= "ORIENTATION_DESC">Orientation sensor shows the orientation of the device with respect to the Earth.</string>
+    <string name= "ORIENTATION_NORTH">North</string>
+    <string name= "ORIENTATION_NORTHEAST">North-East</string>
+    <string name= "ORIENTATION_EAST">East</string>
+    <string name= "ORIENTATION_EASTSOUTH">East-South</string>
+    <string name= "ORIENTATION_SOUTH">South</string>
+    <string name= "ORIENTATION_SOUTHWEST">South-West</string>
+    <string name= "ORIENTATION_WEST">West</string>
+    <string name= "ORIENTATION_WESTNORTH">West-North</string>
+
+
+
+    <string name="HomeDesc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec id posuere nulla. Vestibulum metus est, dictum ut eros in, interdum aliquam turpis. Sed sit amet ligula in augue dictum eleifend sit amet a ipsum. Sed neque massa, efficitur quis gravida non, fermentum eu nisl. Integer ut nisi ut nisi dictum ullamcorper eget malesuada lorem. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse imperdiet tempus sodales. Morbi mollis massa eleifend, ultricies mauris sit amet, commodo dui. In tempor pharetra turpis.</string>
+    <string name="HomeTitle">SensorInfo</string>
+    <string name="option_menu_settings">Settings</string>
+    <string name="option_menu_help">Help</string>
+
+</resources>

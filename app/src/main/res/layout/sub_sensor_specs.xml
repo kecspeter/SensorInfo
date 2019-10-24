@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:id="@+id/sub_sensor_specs">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <TextView
+            android:id="@+id/sensorFragmentVentor"
+            style="@style/SensorFragment"
+            android:layout_weight="2"
+            android:text="@string/sensor_vendor"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/sensorFragmentVentorName"
+            style="@style/SensorFragment"
+            android:layout_weight="1"
+            android:text="sampleText" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <TextView
+            android:id="@+id/sensorFragmentVersion"
+            style="@style/SensorFragment"
+            android:layout_weight="2"
+            android:text="@string/sensor_version"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/sensorFragmentVersionName"
+            style="@style/SensorFragment"
+            android:layout_weight="1"
+            android:text="sampleText" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <TextView
+            android:id="@+id/sensorFragmentMaxrange"
+            style="@style/SensorFragment"
+            android:layout_weight="2"
+            android:text="@string/sensor_maxrange"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/sensorFragmentMaxrangeName"
+            style="@style/SensorFragment"
+            android:layout_weight="1"
+            android:text="sampleText" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <TextView
+            android:id="@+id/sensorFragmentResolution"
+            style="@style/SensorFragment"
+            android:layout_weight="2"
+            android:text="@string/sensor_resolution"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/sensorFragmentResolutionName"
+            style="@style/SensorFragment"
+            android:layout_weight="1"
+            android:text="sampleText" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <TextView
+            android:id="@+id/sensorFragmentPower"
+            style="@style/SensorFragment"
+            android:layout_weight="2"
+            android:text="@string/sensor_power"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/sensorFragmentPowerName"
+            style="@style/SensorFragment"
+            android:layout_weight="1"
+            android:text="sampleText" />
+
+    </LinearLayout>
+
+</LinearLayout>

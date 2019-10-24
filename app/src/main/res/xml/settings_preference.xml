@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <CheckBoxPreference android:title="Proximity display mode"
+        android:defaultValue="false"
+        android:summary="Use numeric value instead of NEAR or FAR."
+        android:key="proximity_mode" />
+
+    <PreferenceCategory android:title="Unit of mesurement">
+
+        <ListPreference android:title="Length"
+            android:summary="Select the unit of angle"
+            android:key="unit_length"
+            android:defaultValue="1"
+            android:entries="@array/listArray"
+            android:entryValues="@array/listValues" />
+
+        <ListPreference android:title="Angle"
+            android:summary="Select the unit of angle"
+            android:key="unit_angle"
+            android:defaultValue="1"
+            android:entries="@array/listArray"
+            android:entryValues="@array/listValues" />
+
+        <ListPreference android:title="Magnetic field"
+            android:summary="Select the unit of magnetic field"
+            android:key="unit_magnet"
+            android:defaultValue="1"
+            android:entries="@array/listArray"
+            android:entryValues="@array/listValues" />
+
+    </PreferenceCategory>
+</PreferenceScreen>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/AppTheme"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/sensorFragmentTitle"
+                        style="@style/SensorFragment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="24dp"
+                        android:text="@string/MAGNETOMETER_NAME"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+
+                <TextView
+                    android:id="@+id/sensorFragmentValue"
+                    style="@style/SensorFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:text=" "
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+
+                    android:padding="12dp"
+                    android:layout_margin="8dp"
+                    android:background="@drawable/rounded_textbox"
+
+                    />
+
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/sensorFragmentDesc"
+                        style="@style/SensorFragment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="16dp"
+                        android:text="@string/MAGNETOMETER_DESC"
+                        android:textSize="20sp" />
+
+                </LinearLayout>
+
+                <hu.bme.aut.sensorinfo.DrawingView
+                    android:id="@+id/Mag_sensorCanvas"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                </hu.bme.aut.sensorinfo.DrawingView>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/Mag_sensorSpecs"
+                    android:padding="4dp">
+
+                </FrameLayout>
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+</ScrollView>
