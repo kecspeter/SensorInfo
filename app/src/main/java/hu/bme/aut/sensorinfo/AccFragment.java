@@ -1,11 +1,14 @@
 package hu.bme.aut.sensorinfo;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +24,8 @@ public class AccFragment extends Fragment
 	private static SensorManager sensorService;
 	private Sensor sensor;
 	private DrawingView canvas;
+	private SharedPreferences sp;
+	private String unit_length;
 
 	@Nullable
 	@Override
@@ -43,6 +48,7 @@ public class AccFragment extends Fragment
 
 		}
 
+		sp = PreferenceManager.getDefaultSharedPreferences(getContext());
 
 	}
 
@@ -50,8 +56,17 @@ public class AccFragment extends Fragment
 	public void onResume()
 	{
 		super.onResume();
+		if(sp.getString("unit_length", "m-cm").equals("m-cm"))
+		{
+			unit_length = "m/s^2";
+		}
+		else
+		{
+			unit_length = "ft/s^2";
+		}
 		createSpecs();
 		canvas = getView().findViewById(R.id.Acc_sensorCanvas);
+		canvas.setRange(sensor.getMaximumRange());
 	}
 
 	private void createSpecs()
@@ -67,10 +82,10 @@ public class AccFragment extends Fragment
 		version.setText(sensor.getVersion()+ " ");
 
 		TextView maxRange = getView().findViewById(R.id.sensorFragmentMaxrangeName);
-		maxRange.setText(sensor.getMaximumRange()+ " m/s^2");
+		maxRange.setText((unit_length.equals("ft/s^2")? convertMtoFt(sensor.getMaximumRange()) : sensor.getMaximumRange()) + unit_length);
 
 		TextView resolution = getView().findViewById(R.id.sensorFragmentResolutionName);
-		resolution.setText(sensor.getResolution()+ "m/s^2");
+		resolution.setText((unit_length.equals("ft/s^2")? convertMtoFt(sensor.getResolution()) : sensor.getResolution()) + unit_length);
 
 		TextView current = getView().findViewById(R.id.sensorFragmentPowerName);
 		current.setText(sensor.getPower()+ "mA");
@@ -85,10 +100,20 @@ public class AccFragment extends Fragment
 			if(event.sensor.getType() == Sensor.TYPE_ACCELEROMETER)
 			{
 				TextView sensorValue = getView().findViewById(R.id.sensorFragmentValue);
-				sensorValue.setText("x: "+event.values[0]+ "\ny: "+ event.values[1]+ "\nz: "+event.values[2]);
+				if(unit_length.equals("ft/s^2"))
+				{
+					sensorValue.setText("x: "+ convertMtoFt(event.values[0])+ unit_length + "\n" +
+										"y: " + convertMtoFt(event.values[1]) + unit_length + "\n" +
+										"z: " + convertMtoFt(event.values[2]) + unit_length);
+				}
+				else
+				{
+					sensorValue.setText("x: " + event.values[0] + unit_length + "\n" +
+										"y: "+ event.values[1] + unit_length + "\n" +
+										"z: "+event.values[2] + unit_length);
+				}
 
 				canvas.addPos(event.values[0],event.values[1],event.values[2]);
-				canvas.setRange(sensor.getMaximumRange());
 				canvas.invalidate();
 			}
 		}
@@ -99,6 +124,13 @@ public class AccFragment extends Fragment
 
 		}
 	};
+
+
+	private float convertMtoFt(float m)
+	{
+		return (m * 3.2808399f);
+	}
+
 
 	@Override
 	public void onDestroyView()

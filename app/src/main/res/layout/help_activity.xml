@@ -2,5 +2,30 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <TextView
+        style="@style/SensorFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/option_menu_help"
+        android:textAlignment="center"
+        android:paddingTop="20dp"
+        android:paddingBottom="10dp"
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
+    <TextView
+        style="@style/SensorFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_textbox"
+        android:padding="20dp"
+        android:text="@string/HelpDesc" />
+
+    <TextView
+        style="@style/SensorFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_textbox"
+        android:padding="20dp"
+        android:text="@string/HelpDesc2" />
 </LinearLayout>

@@ -1,11 +1,13 @@
 package hu.bme.aut.sensorinfo;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +23,9 @@ public class MagFragment extends Fragment
 	private static SensorManager sensorService;
 	private Sensor sensor;
 	private DrawingView canvas;
+	private SharedPreferences sp;
+	private String unit_magnet;
+
 
 	@Nullable
 	@Override
@@ -42,15 +47,18 @@ public class MagFragment extends Fragment
 					SensorManager.SENSOR_DELAY_FASTEST);
 		}
 
-
+		sp = PreferenceManager.getDefaultSharedPreferences(getContext());
 	}
 
 	@Override
 	public void onResume()
 	{
 		super.onResume();
+		unit_magnet = sp.getString("unit_magnet", "μT");
 		createSpecs();
 		canvas = getView().findViewById(R.id.Mag_sensorCanvas);
+		canvas.setRange(sensor.getMaximumRange());
+
 	}
 
 	private void createSpecs()
@@ -66,10 +74,10 @@ public class MagFragment extends Fragment
 		version.setText(sensor.getVersion()+ " ");
 
 		TextView maxRange = getView().findViewById(R.id.sensorFragmentMaxrangeName);
-		maxRange.setText(sensor.getMaximumRange()+ " uT");
+		maxRange.setText((unit_magnet.equals("mG")? convertuTtomG(sensor.getMaximumRange()) : sensor.getMaximumRange()) + unit_magnet);
 
 		TextView resolution = getView().findViewById(R.id.sensorFragmentResolutionName);
-		resolution.setText(sensor.getResolution()+ " uT");
+		resolution.setText((unit_magnet.equals("mG")? convertuTtomG(sensor.getResolution()) : sensor.getResolution())+ unit_magnet);
 
 		TextView current = getView().findViewById(R.id.sensorFragmentPowerName);
 		current.setText(sensor.getPower()+ "mA");
@@ -84,10 +92,11 @@ public class MagFragment extends Fragment
 			if(event.sensor.getType() == Sensor.TYPE_MAGNETIC_FIELD)
 			{
 				TextView sensorValue = getView().findViewById(R.id.sensorFragmentValue);
-				sensorValue.setText("x: "+event.values[0]+ "\ny: "+ event.values[1]+ "\nz: "+event.values[2]);
-
+				sensorValue.setText(
+						"x: "+ (unit_magnet.equals("rad")? convertuTtomG(event.values[0]): event.values[0]) + unit_magnet + "\n" +
+						"y: "+ (unit_magnet.equals("rad")? convertuTtomG(event.values[1]): event.values[1]) + unit_magnet + "\n" +
+						"z: "+ (unit_magnet.equals("rad")? convertuTtomG(event.values[2]): event.values[2]) + unit_magnet);
 				canvas.addPos(event.values[0],event.values[1],event.values[2]);
-				canvas.setRange(sensor.getMaximumRange());
 				canvas.invalidate();
 			}
 		}
@@ -98,6 +107,13 @@ public class MagFragment extends Fragment
 
 		}
 	};
+
+
+	private float convertuTtomG(float uT)
+	{
+		return (uT * 10);
+	}
+
 
 	@Override
 	public void onDestroyView()

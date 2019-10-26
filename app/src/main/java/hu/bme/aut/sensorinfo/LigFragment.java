@@ -64,7 +64,6 @@ public class LigFragment extends Fragment
 
 		TextView current = getView().findViewById(R.id.sensorFragmentPowerName);
 		current.setText(sensor.getPower()+ "mA");
-
 	}
 
 	@Override
@@ -72,6 +71,7 @@ public class LigFragment extends Fragment
 	{
 		super.onResume();
 		canvas = getView().findViewById(R.id.Lig_sensorCanvas);
+		canvas.setRange(sensor.getMaximumRange()/3);
 	}
 
 
@@ -85,7 +85,7 @@ public class LigFragment extends Fragment
 				sensorValue.setText(event.values[0]+" lx");
 
 				canvas.addPos(event.values[0]);
-				canvas.setRange(sensor.getMaximumRange()/3);
+
 				canvas.invalidate();
 			}
 		}

@@ -1,11 +1,13 @@
 package hu.bme.aut.sensorinfo;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +22,9 @@ public class OriFragment extends Fragment
 {
 	private static SensorManager sensorService;
 	private Sensor sensor;
+	private SharedPreferences sp;
+	private String unit_angle;
+
 
 	@Nullable
 	@Override
@@ -39,12 +44,16 @@ public class OriFragment extends Fragment
 			sensorService.registerListener(sensorEventListener, sensor,
 					SensorManager.SENSOR_DELAY_FASTEST);
 		}
+		sp = PreferenceManager.getDefaultSharedPreferences(getContext());
+
 	}
 
 	@Override
-	public void onStart()
+	public void onResume()
 	{
-		super.onStart();
+		super.onResume();
+		unit_angle = sp.getString("unit_angle", "°");
+
 		FrameLayout specs = getView().findViewById(R.id.Ori_sensorSpecs);
 		View sub_specs = getLayoutInflater().inflate(R.layout.sub_sensor_specs,null);
 		specs.addView(sub_specs);
@@ -56,17 +65,15 @@ public class OriFragment extends Fragment
 		version.setText(sensor.getVersion()+ " ");
 
 		TextView maxRange = getView().findViewById(R.id.sensorFragmentMaxrangeName);
-		maxRange.setText(sensor.getMaximumRange()+ "°");
+		maxRange.setText(unit_angle.equals("rad")? convertDegtoRad(sensor.getMaximumRange())+ unit_angle : sensor.getMaximumRange()+ unit_angle);
 
 		TextView resolution = getView().findViewById(R.id.sensorFragmentResolutionName);
-		resolution.setText(sensor.getResolution()+ "°");
+		resolution.setText(unit_angle.equals("rad")? convertDegtoRad(sensor.getResolution())+ unit_angle : sensor.getResolution()+ unit_angle);
 
 		TextView current = getView().findViewById(R.id.sensorFragmentPowerName);
 		current.setText(sensor.getPower()+ "mA");
 
 	}
-
-
 
 	private SensorEventListener sensorEventListener = new SensorEventListener() {
 		@Override
@@ -94,12 +101,11 @@ public class OriFragment extends Fragment
 				if(v <= 337.5 && v > 292.5)
 					sensorValue.setText(getString(R.string.ORIENTATION_WESTNORTH));
 
-
 				TextView sensorValue2 = getView().findViewById(R.id.sensorFragmentValue2);
-					sensorValue2.setText("Y-axis: " + event.values[0] + "°"+ "\n"+ "X-axis: " + event.values[1] + "°"+"\n"+ "Z-axis: " + event.values[2]+ "°");
-
-
-
+					sensorValue2.setText(
+							"Y-axis: " + (unit_angle.equals("rad")? convertDegtoRad(event.values[0] ) : event.values[0]) + "\n"+
+							"X-axis: " + (unit_angle.equals("rad")? convertDegtoRad(event.values[1] ) : event.values[1]) + unit_angle +"\n"+
+							"Z-axis: " + (unit_angle.equals("rad")? convertDegtoRad(event.values[2] ) : event.values[2]) + unit_angle);
 			}
 		}
 
@@ -109,6 +115,11 @@ public class OriFragment extends Fragment
 
 		}
 	};
+
+	private float convertDegtoRad(float deg)
+	{
+		return (deg * 0.0174532925f);
+	}
 
 	@Override
 	public void onDestroyView()

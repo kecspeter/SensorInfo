@@ -1,11 +1,13 @@
 package hu.bme.aut.sensorinfo;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +25,10 @@ public class ProxFragment extends Fragment
 	private static SensorManager sensorService;
 	private Sensor sensor;
 	private int mode = 1;
+	private SharedPreferences sp;
+	private boolean unit_prox;
+	private String unit_length;
+
 
 	@Nullable
 	@Override
@@ -42,15 +48,27 @@ public class ProxFragment extends Fragment
 			sensorService.registerListener(sensorEventListener, sensor,
 					SensorManager.SENSOR_DELAY_NORMAL);
 		}
+		sp = PreferenceManager.getDefaultSharedPreferences(getContext());
 	}
 
 	@Override
-	public void onStart()
+	public void onResume()
 	{
-		super.onStart();
+		super.onResume();
 		FrameLayout specs = getView().findViewById(R.id.Prox_sensorSpecs);
 		View sub_specs = getLayoutInflater().inflate(R.layout.sub_sensor_specs,null);
 		specs.addView(sub_specs);
+
+		unit_prox = sp.getBoolean("proximity_mode", false);
+		if(sp.getString("unit_length", "NA").equals("m-cm"))
+		{
+			unit_length = "cm";
+		}
+		else
+		{
+			unit_length = "in";
+		}
+
 
 		TextView ventor = getView().findViewById(R.id.sensorFragmentVentorName);
 		ventor.setText(sensor.getVendor());
@@ -59,17 +77,15 @@ public class ProxFragment extends Fragment
 		version.setText(sensor.getVersion()+ " ");
 
 		TextView maxRange = getView().findViewById(R.id.sensorFragmentMaxrangeName);
-		maxRange.setText(sensor.getMaximumRange()+ "cm");
+		maxRange.setText(unit_length.equals("in")? convertCmtoIn(sensor.getMaximumRange())+ unit_length : sensor.getMaximumRange()+ unit_length);
 
 		TextView resolution = getView().findViewById(R.id.sensorFragmentResolutionName);
-		resolution.setText(sensor.getResolution()+ "cm");
+		resolution.setText(unit_length.equals("in")? convertCmtoIn(sensor.getResolution())+ unit_length : sensor.getResolution()+ unit_length);
 
 		TextView current = getView().findViewById(R.id.sensorFragmentPowerName);
 		current.setText(sensor.getPower()+ "mA");
 
 	}
-
-
 
 	private SensorEventListener sensorEventListener = new SensorEventListener() {
 		@Override
@@ -78,11 +94,11 @@ public class ProxFragment extends Fragment
 			if(event.sensor.getType() == Sensor.TYPE_PROXIMITY)
 			{
 				TextView sensorValue = getView().findViewById(R.id.sensorFragmentValue);
-				if(mode == 0)
+				if(unit_prox)
 				{
-					sensorValue.setText(event.values[0]+" cm");
+					sensorValue.setText(unit_length.equals("in")? convertCmtoIn(event.values[0]) + unit_length : event.values[0] + unit_length);
 				}
-				if(mode == 1)
+				else
 				{
 					if(event.values[0] == 0)
 					{
@@ -104,6 +120,11 @@ public class ProxFragment extends Fragment
 
 		}
 	};
+
+	private float convertCmtoIn(float cm)
+	{
+		return (cm * 0.393700787f);
+	}
 
 	@Override
 	public void onDestroyView()

@@ -1,20 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="my_books">
-        <item>Scala Cookbook</item>
-        <item>Play Framework Recipes</item>
-        <item>How I Sold My Business: A Personal Diary</item>
-        <item>A Survival Guide for New Consultants</item>
+    <string-array name="length">
+        <item>ft-in</item>
+        <item>m-cm</item>
     </string-array>
-
-    <string-array name="listArray">
-        <item>Headings</item>
-        <item>Headings and Details</item>
-        <item>All Data</item>
+    <string-array name="angle">
+        <item>°</item>
+        <item>rad</item>
     </string-array>
-    <string-array name="listValues">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
+    <string-array name="magnet">
+        <item>μT</item>
+        <item>mG</item>
     </string-array>
 </resources>

@@ -1,32 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <CheckBoxPreference android:title="Proximity display mode"
-        android:defaultValue="false"
-        android:summary="Use numeric value instead of NEAR or FAR."
-        android:key="proximity_mode" />
+    <PreferenceCategory android:title="@string/settings_categoryTitle_mode">
+        <CheckBoxPreference android:title="@string/settings_proximity_mode"
+            android:defaultValue="false"
+            android:summary="@string/settings_proximity_mode_summary"
+            android:key="proximity_mode" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/settings_categoryTitle_unit">
 
-    <PreferenceCategory android:title="Unit of mesurement">
-
-        <ListPreference android:title="Length"
-            android:summary="Select the unit of angle"
+        <ListPreference android:title="@string/settings_unit_length"
+            android:summary="@string/settings_unit_length_summary"
             android:key="unit_length"
-            android:defaultValue="1"
-            android:entries="@array/listArray"
-            android:entryValues="@array/listValues" />
+            android:defaultValue="m-cm"
+            android:entries="@array/length"
+            android:entryValues="@array/length" />
 
-        <ListPreference android:title="Angle"
-            android:summary="Select the unit of angle"
+        <ListPreference android:title="@string/settings_unit_angle"
+            android:summary="@string/settings_unit_angle_summary"
             android:key="unit_angle"
-            android:defaultValue="1"
-            android:entries="@array/listArray"
-            android:entryValues="@array/listValues" />
+            android:defaultValue="°"
+            android:entries="@array/angle"
+            android:entryValues="@array/angle" />
 
-        <ListPreference android:title="Magnetic field"
-            android:summary="Select the unit of magnetic field"
+        <ListPreference android:title="@string/settings_unit_magnet"
+            android:summary="@string/settings_unit_magnet_summary"
             android:key="unit_magnet"
-            android:defaultValue="1"
-            android:entries="@array/listArray"
-            android:entryValues="@array/listValues" />
+            android:defaultValue="μT"
+            android:entries="@array/magnet"
+            android:entryValues="@array/magnet" />
 
     </PreferenceCategory>
 </PreferenceScreen>

@@ -22,7 +22,7 @@
             android:id="@+id/sensorFragmentVentorName"
             style="@style/SensorFragment"
             android:layout_weight="1"
-            android:text="sampleText" />
+            android:text=" " />
 
     </LinearLayout>
 
@@ -44,7 +44,7 @@
             android:id="@+id/sensorFragmentVersionName"
             style="@style/SensorFragment"
             android:layout_weight="1"
-            android:text="sampleText" />
+            android:text=" " />
 
     </LinearLayout>
 
@@ -65,7 +65,7 @@
             android:id="@+id/sensorFragmentMaxrangeName"
             style="@style/SensorFragment"
             android:layout_weight="1"
-            android:text="sampleText" />
+            android:text=" " />
 
     </LinearLayout>
 
@@ -86,7 +86,7 @@
             android:id="@+id/sensorFragmentResolutionName"
             style="@style/SensorFragment"
             android:layout_weight="1"
-            android:text="sampleText" />
+            android:text=" " />
 
     </LinearLayout>
 
@@ -107,7 +107,7 @@
             android:id="@+id/sensorFragmentPowerName"
             style="@style/SensorFragment"
             android:layout_weight="1"
-            android:text="sampleText" />
+            android:text=" " />
 
     </LinearLayout>
 
